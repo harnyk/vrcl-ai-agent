@@ -19,12 +19,10 @@ export default async function ChatPage() {
     .sort({ createdAt: 1 })
     .toArray();
 
-  // Convert stored messages to UIMessage format (AI SDK 6)
   const initialMessages: UIMessage[] = rawMessages.map((m) => ({
     id: m._id!.toString(),
     role: m.role,
-    parts: [{ type: "text" as const, text: m.content }],
-    metadata: undefined,
+    parts: m.parts,
   }));
 
   return (
